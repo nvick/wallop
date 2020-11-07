@@ -1,0 +1,19 @@
+version: '3.7'
+
+services:
+  app:
+    build:
+      context: .
+      args:
+        - UID=${RUBY_UID:?err}
+        - GID=${RUBY_UID:?err}
+    volumes:
+      - .:/app:delegated
+      - gems:/gems
+    user: ruby
+    tty: true
+    stdin_open: true
+    command: tail -f /dev/null
+
+volumes:
+  gems:
